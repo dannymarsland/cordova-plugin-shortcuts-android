@@ -12,6 +12,7 @@ Shortcuts.prototype.supportsDynamic = function (successCallback, errorCallback) 
 };
 
 Shortcuts.prototype.supportsPinned = function (successCallback, errorCallback) {
+  throw new Error('Shortcuts.addPinned is unsupported');
   cordova.exec(
     successCallback,
     errorCallback,
@@ -32,6 +33,7 @@ Shortcuts.prototype.setDynamic = function (shortcuts, successCallback, errorCall
 };
 
 Shortcuts.prototype.addPinned = function (shortcut, successCallback, errorCallback) {
+  throw new Error('Shortcuts.addPinned is unsupported');
   cordova.exec(
     successCallback,
     errorCallback,

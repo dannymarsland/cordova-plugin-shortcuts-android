@@ -57,21 +57,6 @@ window.plugins.Shortcuts.supportsDynamic(function(supported) {
 })
 ```
 
-### Checking if Pinned Shortcuts are supported
-
-Pinned shortcuts require SDK 26 or later. Use `supportsPinned` to check whether the current device meets those requirements.
-
-```javascript
-window.plugins.Shortcuts.supportsPinned(function(supported) { 
-	if (supported)
-		window.alert('Pinned shortcuts are supported');
-	else
-		window.alert('Pinned shortcuts are NOT supported');
-}, function(error) {
-	window.alert('Error: ' + error);
-})
-```
-
 ### Setting the application Dynamic Shortcuts
 
 Use `setDynamic` to set the Dynamic Shortcuts for the application, all at once. The shortcuts provided as a parameter will override any existing shortcut. Use an empty array to clear out existing shortcuts.
@@ -82,6 +67,7 @@ var shortcut = {
 	shortLabel: 'Short description',
 	longLabel: 'Longer string describing the shortcut',
 	iconBitmap: '<Bitmap for the shortcut icon, base64 encoded>',
+	iconResource: '<Resource name for icon>',
 	intent: {
 		action: 'android.intent.action.RUN',
 		categories: [
@@ -98,37 +84,6 @@ var shortcut = {
 }
 window.plugins.Shortcuts.setDynamic([shortcut], function() {
 	window.alert('Shortcuts were applied successfully');
-}, function(error) {
-	window.alert('Error: ' + error);
-})
-```
-
-### Adding a Pinned Shortcut to the launcher
-
-Use `addPinned` to add a new Pinned Shortcut to the launcher.
-
-```javascript
-var shortcut = {
-	id: 'my_shortcut_1',
-	shortLabel: 'Short description',
-	longLabel: 'Longer string describing the shortcut',
-	iconBitmap: '<Bitmap for the shortcut icon, base64 encoded>', // Defaults to the main application icon
-	intent: {
-		action: 'android.intent.action.RUN',
-		categories: [
-			'android.intent.category.TEST', // Built-in Android category
-			'MY_CATEGORY' // Custom categories are also supported
-		],
-		flags: 67108864, // FLAG_ACTIVITY_CLEAR_TOP
-		data: 'myapp://path/to/launch?param=value', // Must be a well-formed URI
-		extras: {
-			'android.intent.extra.SUBJECT': 'Hello world!', // Built-in Android extra (string)
-			'MY_BOOLEAN': true, // Custom extras are also supported (boolean, number and string only)
-		}
-	}
-}
-window.plugins.Shortcuts.addPinned(shortcut, function() {
-	window.alert('Shortcut pinned successfully');
 }, function(error) {
 	window.alert('Error: ' + error);
 })
